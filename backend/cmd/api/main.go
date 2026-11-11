@@ -37,7 +37,11 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			log.Error("failed to close database", "error", err)
+		}
+	}()
 
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(5)
