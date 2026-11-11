@@ -2,7 +2,7 @@ name: PR Check
 
 on:
   pull_request:
-    branches: [ main, feat-backend ]
+    branches: [ main, feat-backend, feat-frontend ]
 
 jobs:
   lint-and-test:
