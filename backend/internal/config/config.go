@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log/slog"
 	"strings"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 type Config struct {
@@ -28,6 +30,11 @@ func Load(getenv func(string) string) (Config, error) {
 			errs = append(errs,	fmt.Errorf("LOG_LEVEL: %w", err))
 		}
 	}
+
+	if err := errors.Join(errs...); err != nil {
+		return Config{}, err
+	}
+	return c, nil
 }
 
 func orDefault(v, def string) string {
