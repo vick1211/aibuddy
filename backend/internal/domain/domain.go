@@ -1,6 +1,10 @@
 package domain
 
-import "github.com/google/uuid"
+import (
+	"errors"
+
+	"github.com/google/uuid"
+)
 
 type Role string
 
@@ -13,6 +17,13 @@ const (
 
 type Identity struct {
 	UserID uuid.UUID
-	Role Role
-	Team string
+	Role   Role
+	Team   string
 }
+
+var (
+	ErrForbidden    = errors.New("forbidden")
+	ErrInvalidArgs  = errors.New("invalid arguments")
+	ErrNotFound     = errors.New("not found")
+	ErrUnauthorized = errors.New("unauthorized")
+)
